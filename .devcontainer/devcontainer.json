@@ -1,0 +1,13 @@
+{
+  "name": "ESP-IDF",
+  "image": "espressif/esp-idf:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "espressif.esp-idf-extension"
+      ]
+    }
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "bash -c '. $IDF_PATH/export.sh'"
+}
