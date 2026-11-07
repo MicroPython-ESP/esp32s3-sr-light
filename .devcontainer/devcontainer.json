@@ -1,0 +1,31 @@
+{
+  "name": "ESP-IDF",
+  "image": "espressif/idf:release-v5.3",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "espressif.esp-idf-extension"
+      ],
+      "settings": {
+        "idf.espIdfPath": "/opt/esp/idf",
+        "idf.toolsPath": "/opt/esp",
+        "idf.gitPath": "/usr/bin/git",
+        "files.exclude": {
+          "**/build": true,
+          "**/managed_components": true
+        },
+        "files.watcherExclude": {
+          "**/build/**": true,
+          "**/managed_components/**": true
+        },
+        "explorer.excludeGitIgnore": true
+      }
+    }
+  },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8GB"
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "bash -c '. /opt/esp/idf/export.sh && echo ESP-IDF ready'"
+}
