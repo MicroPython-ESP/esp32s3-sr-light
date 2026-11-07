@@ -1,0 +1,4 @@
+dependencies:
+  idf: ">=5.3"
+  esphub/led_strip: "^2.5.0"
+  espressif/esp-sr: "^1.0.0"
