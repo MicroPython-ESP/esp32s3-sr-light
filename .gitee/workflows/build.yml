@@ -6,8 +6,6 @@ triggers:
     branches:
       prefix:
         - main
-  workflow_dispatch:
-
 steps:
   - step: build@gcc
     name: build-esp32-idf
