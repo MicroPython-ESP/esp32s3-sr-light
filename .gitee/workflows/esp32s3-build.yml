@@ -1,0 +1,29 @@
+version: "1.0"
+name: esp32s3-sr-light-build
+displayName: ESP32-S3 语音灯编译
+triggers:
+  push:
+    branches:
+      prefix:
+        - main
+  workflow_dispatch:
+steps:
+  - step: build@gcc
+    name: build-esp32s3
+    displayName: GCC构建
+    gccVersion: "9.4"
+    commands: |
+      apt-get update
+      apt-get install -y git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+      git clone -b v5.3 --recursive https://gitee.com/EspressifSystems/esp-idf.git
+      cd esp-idf
+      ./install.sh esp32s3
+      cd ..
+      . ./esp-idf/export.sh
+      idf.py set-target esp32s3
+      idf.py build
+    artifacts:
+      - name: BUILD_ARTIFACT
+        path:
+          - ./build
+        type: .tar.gz
