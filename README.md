@@ -1,6 +1,6 @@
-=====================================
+===========
 ESP32-S3 语音控制 WS2812 灯工程说明
-=====================================
+===========
 【项目名称】esp32s3-sr-light
 【目标芯片】ESP32-S3 N16R8（16MB Flash / 8MB Octal PSRAM）
 【开发框架】ESP-IDF v5.3
@@ -90,9 +90,9 @@ Flash 大小：16MB
 3. 增加更多灯效与自定义语音指令
 4. 测试全功能语音控制流程
 
-=====================================
+===========
 ESP32-S3 Voice-Controlled WS2812 LED Project
-=====================================
+===========
 Project Name: esp32s3-sr-light
 Target Chip: ESP32-S3 N16R8 (16MB Flash / 8MB Octal PSRAM)
 Framework: ESP-IDF v5.3
