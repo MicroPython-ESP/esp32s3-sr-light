@@ -6,7 +6,7 @@
 #include "driver/i2s.h"
 #include "driver/rmt.h"
 #include "led_strip.h"
-#include "esp_sr.h"
+// #include "esp_sr.h"  // 语音识别部分暂时注释，后续适配
 #include "esp_err.h"
 
 #define I2S_SCK_PIN     4
@@ -31,7 +31,7 @@ static uint8_t g_r=0,g_g=0,g_b=0;
 static uint8_t g_bright = 50;
 static uint32_t g_blink_ms = 500;
 
-static const uint8_t color_table[8][3] = {
+static const uint8_t color_table[8][3] __attribute__((unused)) = {
     {255,0,0},    //红
     {255,120,0},  //橙
     {255,255,0},  //黄
@@ -51,6 +51,7 @@ static void set_rgb_raw(uint8_t r,uint8_t g,uint8_t b)
     led_strip_refresh(led_strip);
 }
 
+#if 0  // 语音识别回调暂时注释，后续适配新版API
 static void sr_cb(esp_sr_result_t *res, void *arg)
 {
     if(!res || !res->text) return;
@@ -103,6 +104,7 @@ static void sr_cb(esp_sr_result_t *res, void *arg)
 
     else if(strstr(txt,"彩虹渐变")) g_mode=MODE_RAINBOW;
 }
+#endif  // 语音识别回调暂时注释，后续适配
 
 static void light_task(void *arg)
 {
@@ -165,8 +167,8 @@ static void led_init(void)
     led_strip_config_t strip_cfg={
         .strip_gpio_num=RGB_PIN,
         .max_leds=LED_NUM,
-        .led_pixel_format=LED_PIXEL_FORMAT_GRB,
         .led_model=LED_MODEL_WS2812,
+        .color_component_format=LED_STRIP_COLOR_COMPONENT_FMT_GRB,
         .flags.invert_out=false
     };
     led_strip_rmt_config_t rmt_cfg={
@@ -203,13 +205,20 @@ static void i2s_mic_init(void)
 void app_main(void)
 {
     led_init();
-    i2s_mic_init();
+    // i2s_mic_init();  // 麦克风暂时不用，语音识别部分后续再加
     xTaskCreate(light_task,"light",2048,NULL,5,NULL);
 
-    esp_sr_config_t sr_cfg={
-        .i2s_port=I2S_NUM_0,
-        .sample_rate=16000,
-        .callback=sr_cb
-    };
-    ESP_ERROR_CHECK(esp_sr_start(&sr_cfg));
+    // 语音识别暂时注释，后续适配
+    // esp_sr_config_t sr_cfg={
+    //     .i2s_port=I2S_NUM_0,
+    //     .sample_rate=16000,
+    //     .callback=sr_cb
+    // };
+    // ESP_ERROR_CHECK(esp_sr_start(&sr_cfg));
+
+    // 上电自动测试：亮绿灯1秒，然后熄灭
+    set_rgb_raw(0,255,0);
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    set_rgb_raw(0,0,0);
+    g_mode = MODE_OFF;
 }
