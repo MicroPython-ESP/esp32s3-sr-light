@@ -59,19 +59,6 @@ INMP441 I2S 数字麦克风（语音功能用，当前未启用）：
   青 (0,255,200)  蓝 (0,0,255)    紫 (180,0,255)  白 (255,255,255)
 
 ------------------------------
-工程代码结构
-------------------------------
-esp32s3-sr-light/
-├── CMakeLists.txt          # 工程顶层 CMake 配置
-├── sdkconfig.defaults      # 硬件默认配置（CPU 240MHz、OCT PSRAM 等）
-├── main/
-│   ├── app.c               # 主程序：所有灯效逻辑、语音指令解析、引脚定义
-│   ├── CMakeLists.txt      # main 组件依赖声明
-│   └── idf_component.yml    # 组件依赖声明
-└── components/
-    └── led_strip/          # WS2812 驱动组件 v3.0.3
-
-------------------------------
 固件烧录参数
 ------------------------------
 波特率：460800
@@ -144,16 +131,7 @@ Adjustment commands:
   Red (255,0,0) / Orange (255,120,0) / Yellow (255,255,0) / Green (0,255,0)
   Cyan (0,255,200) / Blue (0,0,255) / Purple (180,0,255) / White (255,255,255)
 
-Project Structure:
-esp32s3-sr-light/
-├── CMakeLists.txt          # Top-level CMake build config
-├── sdkconfig.defaults      # Default hardware config (240MHz CPU, OCT PSRAM)
-├── main/
-│   ├── app.c               # Main program: light effects, voice command parsing, pin definitions
-│   ├── CMakeLists.txt      # Main component dependency declarations
-│   └── idf_component.yml   # Component manager manifest
-└── components/
-    └── led_strip/          # WS2812 driver component v3.0.3
+# WS2812 driver component v3.0.3
 
 Flashing Parameters:
 Baud rate: 460800
